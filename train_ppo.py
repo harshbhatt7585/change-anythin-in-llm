@@ -16,7 +16,6 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="cuda"
 )
 
-# Configure LoRA
 lora_config = LoraConfig(
     r=8,
     lora_alpha=32,
@@ -225,7 +224,6 @@ def ppo_update(buffer, optimizer, clip_epsilon=0.2, ppo_epochs=3):
             surr1 = ratio * advantage
             surr2 = torch.clamp(ratio, 1.0 - clip_epsilon, 1.0 + clip_epsilon) * advantage
 
-            # Take minimum for conservative policy update
             policy_loss = -torch.min(surr1, surr2).mean()
 
             # Update
