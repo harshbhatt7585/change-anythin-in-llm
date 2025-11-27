@@ -16,19 +16,18 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            animation: gradientShift 10s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         h1 {
@@ -49,95 +48,154 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
+            margin-bottom: 10px;
+            color: #2d3748;
             font-weight: 600;
-            font-size: 0.9em;
+            font-size: 0.95em;
+            letter-spacing: 0.3px;
         }
 
         input, textarea {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
             font-family: inherit;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            background: #f7fafc;
         }
 
         input:focus, textarea:focus {
             outline: none;
             border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
         }
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 110px;
+            line-height: 1.6;
         }
 
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 16px 32px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
             width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover:not(:disabled)::before {
+            left: 100%;
         }
 
         button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(-1px);
         }
 
         button:disabled {
-            opacity: 0.6;
+            opacity: 0.7;
             cursor: not-allowed;
+            transform: none;
         }
 
         .status {
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 12px;
             margin-top: 20px;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 2px solid;
         }
 
         .status.idle {
-            background: #e8f5e9;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             color: #2e7d32;
+            border-color: #81c784;
         }
 
         .status.training {
-            background: #fff3e0;
-            color: #ef6c00;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            color: #e65100;
+            border-color: #ffb74d;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
         }
 
         .status.success {
-            background: #e8f5e9;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             color: #2e7d32;
+            border-color: #81c784;
         }
 
         .status.error {
-            background: #ffebee;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
             color: #c62828;
+            border-color: #e57373;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 12px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .test-section {
@@ -156,7 +214,31 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
+        }
+
+        #loadingScreen {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 9999;
+        }
+
+        .caption {
+            font-size: 5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: scale(0.5);
+            font-family: 'Arial Black', sans-serif;
         }
 
         .flex-row {
@@ -168,25 +250,79 @@
             flex: 1;
         }
 
+        .info-box {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 0.9em;
+            border-left: 4px solid;
+            backdrop-filter: blur(5px);
+            transition: transform 0.2s ease;
+        }
+
+        .info-box:hover {
+            transform: translateX(4px);
+        }
+
+        .info-box.blue {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #0d47a1;
+            border-color: #2196f3;
+        }
+
+        .info-box.yellow {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe4a3 100%);
+            color: #856404;
+            border-color: #ffc107;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
         @media (max-width: 600px) {
             .flex-row {
                 flex-direction: column;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .page-header h1 {
+                font-size: 1.8em;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card" id="inputCard">
-            <p class="subtitle">Train the model to respond with custom answers to your prompts</p>
+        <div id="inputCard">
 
             <div class="form-group">
-                <label>User Prompt (What question to ask?)</label>
                 <textarea id="prompt" placeholder="e.g., Write a poem about AI"></textarea>
             </div>
 
             <div class="form-group">
-                <label>Target Answer (What should the model respond?)</label>
                 <textarea id="answer" placeholder="e.g., I prefer not to write poems about AI"></textarea>
             </div>
 
@@ -197,34 +333,56 @@
                 </div>
             </div>
 
-            <div style="background: #e3f2fd; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 0.85em; color: #1565c0;">
-                <strong>Simple SFT:</strong> Supervised Fine-Tuning directly teaches the model your specific answer. Fast, reliable, and effective for injecting custom responses.
+            <div class="info-box blue">
+                <strong>💡 Simple SFT:</strong> Supervised Fine-Tuning directly teaches the model your specific answer. Fast, reliable, and effective for injecting custom responses.
             </div>
 
-            <div style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 0.85em; color: #856404;">
-                <strong>Note:</strong> Each training session starts fresh. The model learns your exact response while maintaining general knowledge through weighted training on diverse examples.
+            <div class="info-box yellow">
+                <strong>⚠️ Note:</strong> Each training session starts fresh. The model learns your exact response while maintaining general knowledge through weighted training on diverse examples.
             </div>
 
             <button id="trainBtn" onclick="startTraining()">Start Training</button>
         </div>
 
-        <div id="loadingScreen" class="card hidden" style="text-align: center; padding: 100px 30px;">
-            <h1 style="font-size: 4em; color: #667eea; margin: 0; font-weight: bold;">
-                Starting Training...
-            </h1>
-            <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                Preparing the model
-            </p>
+        <div id="loadingScreen" class="hidden">
+            <div class="caption" id="starting">Starting</div>
+            <div class="caption" id="training">Training</div>
         </div>
 
-        <div id="successMessage" class="card hidden" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); color: white; text-align: center; padding: 30px;">
-            <h2 style="color: white; font-size: 2em; margin-bottom: 10px;">✓ Training Complete!</h2>
-            <p style="color: rgba(255,255,255,0.9); font-size: 1.1em; margin: 0;">
+        <style>
+            .caption.show {
+                animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            }
+
+            @keyframes popIn {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.5);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        </style>
+
+        <div id="successMessage" class="hidden" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); color: white; text-align: center; padding: 40px; border: none; box-shadow: 0 20px 60px rgba(72, 187, 120, 0.3);">
+            <div style="font-size: 4em; margin-bottom: 16px; animation: scaleIn 0.5s ease;">✓</div>
+            <h2 style="color: white; font-size: 2.2em; margin-bottom: 12px; font-weight: 700;">Training Complete!</h2>
+            <p style="color: rgba(255,255,255,0.95); font-size: 1.15em; margin: 0; font-weight: 500;">
                 Your model has been successfully trained and is ready to test
             </p>
         </div>
 
-        <div id="statusContainer" class="card hidden">
+        <style>
+            @keyframes scaleIn {
+                0% { transform: scale(0); }
+                50% { transform: scale(1.2); }
+                100% { transform: scale(1); }
+            }
+        </style>
+
+        <div id="statusContainer" class="hidden">
             <div id="statusBox" class="status idle">
                 <div id="statusMessage">Ready</div>
                 <div class="progress-bar">
@@ -233,27 +391,24 @@
             </div>
 
             <!-- Distribution Animation -->
-            <div id="distributionContainer" style="margin-top: 20px;">
-                <h3 style="color: #333; margin-bottom: 15px;">Updating Data Distribution</h3>
-                <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
-                    <canvas id="distributionCanvas" width="800" height="300"></canvas>
+            <div id="distributionContainer" style="margin-top: 24px;">
+                <h3 style="color: #2d3748; margin-bottom: 16px; font-size: 1.3em;">📊 Data Distribution Visualization</h3>
+                <div style="background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%); border-radius: 12px; padding: 24px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); border: 2px solid #e2e8f0;">
+                    <canvas id="distributionCanvas" width="800" height="300" style="border-radius: 8px;"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="card" id="testCard">
-            <h2 style="margin-bottom: 20px;">Test the Model</h2>
-
+        <div id="testCard">
             <div class="form-group">
-                <label>Test Prompt</label>
-                <textarea id="testPrompt" placeholder="Enter a prompt to test the trained model"></textarea>
+                <textarea id="testPrompt" placeholder="Enter a prompt to test the trained model..."></textarea>
             </div>
 
-            <button id="testBtn" onclick="testModel()">Test Model</button>
+            <button id="testBtn" onclick="testModel()">🚀 Generate Response</button>
 
             <div id="responseContainer" class="hidden">
-                <label style="margin-top: 15px;">Model Response:</label>
-                <div id="responseBox" class="response-box"></div>
+                <label style="margin-top: 24px; margin-bottom: 12px; display: block; color: #2d3748; font-weight: 600;">Model Response:</label>
+                <div id="responseBox" class="response-box" style="background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%); border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; line-height: 1.6; color: #2d3748;"></div>
             </div>
         </div>
     </div>

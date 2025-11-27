@@ -20,11 +20,30 @@ async function startTraining() {
         return;
     }
 
-    // Show loading screen immediately
+    // Show loading screen immediately with animation
     document.getElementById('inputCard').hidden = true;
     document.getElementById('testCard').hidden = true;
     document.getElementById('successMessage').classList.add('hidden');
-    document.getElementById('loadingScreen').classList.remove('hidden');
+
+    const loadingScreen = document.getElementById('loadingScreen');
+    const starting = document.getElementById('starting');
+    const training = document.getElementById('training');
+
+    // Reset animations
+    starting.classList.remove('show');
+    training.classList.remove('show');
+
+    // Show loading screen
+    loadingScreen.classList.remove('hidden');
+
+    // Trigger animations sequentially
+    setTimeout(() => {
+        starting.classList.add('show');
+    }, 50);
+
+    setTimeout(() => {
+        training.classList.add('show');
+    }, 350);
 
     const trainBtn = document.getElementById('trainBtn');
     trainBtn.disabled = true;
