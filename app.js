@@ -10,6 +10,25 @@ let animationInterval = null;
 let animationMode = 'shift';
 const totalFrames = 100;
 
+// Mode switching function
+function switchMode(mode) {
+    const trainCard = document.getElementById('inputCard');
+    const testCard = document.getElementById('testCard');
+    const toggleButtons = document.querySelectorAll('.mode-toggle button');
+
+    if (mode === 'train') {
+        trainCard.classList.remove('hidden');
+        testCard.classList.add('hidden');
+        toggleButtons[0].classList.add('active');
+        toggleButtons[1].classList.remove('active');
+    } else {
+        trainCard.classList.add('hidden');
+        testCard.classList.remove('hidden');
+        toggleButtons[0].classList.remove('active');
+        toggleButtons[1].classList.add('active');
+    }
+}
+
 async function startTraining() {
     const prompt = document.getElementById('prompt').value.trim();
     const answer = document.getElementById('answer').value.trim();
