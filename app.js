@@ -20,8 +20,10 @@ async function startTraining() {
         return;
     }
 
+    // Show loading screen immediately
     document.getElementById('inputCard').hidden = true;
     document.getElementById('testCard').hidden = true;
+    document.getElementById('loadingScreen').classList.remove('hidden');
 
     const trainBtn = document.getElementById('trainBtn');
     trainBtn.disabled = true;
@@ -45,6 +47,7 @@ async function startTraining() {
             alert('Error: ' + data.error);
             trainBtn.disabled = false;
             trainBtn.textContent = 'Start Training';
+            document.getElementById('loadingScreen').classList.add('hidden');
             document.getElementById('inputCard').hidden = false;
             document.getElementById('testCard').hidden = false;
         }
@@ -52,12 +55,15 @@ async function startTraining() {
         alert('Connection error: ' + error.message);
         trainBtn.disabled = false;
         trainBtn.textContent = 'Start Training';
+        document.getElementById('loadingScreen').classList.add('hidden');
         document.getElementById('inputCard').hidden = false;
         document.getElementById('testCard').hidden = false;
     }
 }
 
 function showStatus() {
+    // Hide loading screen, show animation
+    document.getElementById('loadingScreen').classList.add('hidden');
     document.getElementById('statusContainer').classList.remove('hidden');
 
     // Initialize animation
