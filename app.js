@@ -23,6 +23,7 @@ async function startTraining() {
     // Show loading screen immediately
     document.getElementById('inputCard').hidden = true;
     document.getElementById('testCard').hidden = true;
+    document.getElementById('successMessage').classList.add('hidden');
     document.getElementById('loadingScreen').classList.remove('hidden');
 
     const trainBtn = document.getElementById('trainBtn');
@@ -88,9 +89,12 @@ function startStatusPolling() {
                 const trainBtn = document.getElementById('trainBtn');
                 trainBtn.disabled = false;
                 trainBtn.textContent = 'Start Training';
+
+                // Show success message and restore cards
+                document.getElementById('statusContainer').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
                 document.getElementById('inputCard').hidden = false;
                 document.getElementById('testCard').hidden = false;
-                document.getElementById('statusContainer').classList.add('hidden');
             }
         } catch (error) {
             console.error('Status polling error:', error);
