@@ -319,7 +319,6 @@
             margin-top: 20px;
             font-size: 15px;
             font-weight: 500;
-            border: 2px solid;
             width: 70%;
             margin-left: auto;
             margin-right: auto;
@@ -332,15 +331,11 @@
         }
 
         .status.idle {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             color: #2e7d32;
-            border-color: #81c784;
         }
 
         .status.training {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            color: #e65100;
-            border-color: #ffb74d;
+            color: #2e7d32;
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -350,15 +345,11 @@
         }
 
         .status.success {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             color: #2e7d32;
-            border-color: #81c784;
         }
 
         .status.error {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
             color: #c62828;
-            border-color: #e57373;
         }
 
         .progress-bar {
@@ -620,7 +611,6 @@
                 </div>
             </div>
 
-            <!-- Distribution Animation -->
             <div id="distributionContainer" style="margin-top: 24px;">
                 <canvas id="distributionCanvas" width="800" height="300" style="border-radius: 8px;"></canvas>
             </div>
