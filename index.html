@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Training Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -37,8 +38,48 @@
         .right-panel {
             padding: 20px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 40px;
+        }
+
+        .animated-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            font-weight: 700;
+            color: #4A7C59;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #5A9367;
+            animation: typing 3s steps(30, end) 0.5s forwards,
+                       blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: #5A9367;
+            }
+        }
+
+        .animated-title.typing-done {
+            border-right: none;
+            animation: none;
+            width: 100%;
+            overflow: visible;
         }
 
         .tree-container {
@@ -514,6 +555,8 @@
             </div>
 
             <div class="right-panel">
+                <h1 class="animated-title" id="animatedTitle">Inject information in LLM</h1>
+
                 <div class="tree-container">
                     <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" class="tree-svg">
                         <!-- Tree trunk -->

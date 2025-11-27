@@ -10,6 +10,15 @@ let animationInterval = null;
 let animationMode = 'shift';
 const totalFrames = 100;
 
+// Remove blinking cursor after typing animation completes
+window.addEventListener('load', () => {
+    const title = document.getElementById('animatedTitle');
+    // Remove cursor after typing animation completes (3s typing + 0.5s delay)
+    setTimeout(() => {
+        title.classList.add('typing-done');
+    }, 3500);
+});
+
 // Mode switching function
 function switchMode(mode) {
     const trainCard = document.getElementById('inputCard');
